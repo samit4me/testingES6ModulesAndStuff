@@ -21,9 +21,9 @@ module.exports = function(grunt) {
         },
 
         babel: {
-            // options: {
-            //     sourceMap: false
-            // },
+            options: {
+                sourceMap: true
+            },
             dist: {
                 files: {
                     'es5/script.js': 'es6/bundle.es6'
