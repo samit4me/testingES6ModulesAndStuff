@@ -5,6 +5,24 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+
+        // 1) Need compiling React's JSX templates into JavaScript
+        //      before webpack, as it will throw errors
+        //      before babel, as we are using es6 imports (which is done via webpack)
+        // react: {
+        //     dynamic_mappings: {
+        //         files: [
+        //             {
+        //                 expand: true,
+        //                 cwd: 'es6/',
+        //                 src: ['**/*.jsx'],
+        //                 dest: 'es6/',
+        //                 ext: '.js'
+        //             }
+        //         ]
+        //     }
+        // },
+
         webpack: {
             dist: {
                 entry: './es6/app.es6',
@@ -14,7 +32,7 @@ module.exports = function(grunt) {
                 },
                 module: {
                     loaders: [
-                        { test: /\.es6|\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+                        { test: /\.es6|\.js|\.jsx$/, exclude: /node_modules/, loader: 'babel-loader' }
                     ]
                 }
             }
@@ -39,6 +57,6 @@ module.exports = function(grunt) {
     });
 
     // Default task(s).
-    grunt.registerTask('default', ['webpack', 'babel']);
+    grunt.registerTask('default', ['webpack']);
 
 };
